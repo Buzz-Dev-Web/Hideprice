@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+ <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <buzz_hideprice>
+            <general>
+                <enabled>0</enabled>
+            </general>
+        </buzz_hideprice>
+        <buzz_hideprice>
+            <general>
+                <wording_hide_price>Efetue o login para ver o preço</wording_hide_price>
+            </general>
+        </buzz_hideprice>
+    </default>
+</config>
