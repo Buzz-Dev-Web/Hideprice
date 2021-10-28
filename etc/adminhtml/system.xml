@@ -18,6 +18,7 @@
             <resource>Buzz_Hideprice::config_hideprice</resource>
             <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General Setting</label>
+                <comment>This module is intended to hide the value of products from unlogged in customers.</comment>
                 <field id="enabled" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
