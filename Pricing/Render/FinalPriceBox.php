@@ -11,6 +11,8 @@ use Magento\Framework\Pricing\Render;
 use Magento\Framework\Pricing\Render\PriceBox as BasePriceBox;
 use Magento\Msrp\Pricing\Price\MsrpPrice;
 use Buzz\Hideprice\Helper\Data as Helper;
+use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Http\Context;
 
 /**
  * Class for final_price rendering
@@ -22,6 +24,8 @@ class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
 {
     protected $_helper;
 
+    private $customerSession;
+
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Framework\Pricing\SaleableInterface $saleableItem,
@@ -30,7 +34,9 @@ class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
         array $data = [],
         \Magento\Catalog\Model\Product\Pricing\Renderer\SalableResolverInterface $salableResolver = null,
         \Magento\Catalog\Pricing\Price\MinimalPriceCalculatorInterface $minimalPriceCalculator = null,
-        Helper $helper
+        Helper $helper,
+        CustomerSession $customerSession, 
+        Context $httpContext
     ) {
         parent::__construct($context, 
                             $saleableItem, 
@@ -41,6 +47,8 @@ class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
                             $minimalPriceCalculator);
 
         $this->_helper = $helper;
+        $this->customerSession = $customerSession;
+        $this->httpContext = $httpContext;
     }
 
     /**
@@ -51,29 +59,23 @@ class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
      */
     protected function wrapResult($html)
     {
-        $status = $this->_helper->getIsEnable();
-        if(!$status){
-            return '<div class="price-box ' . $this->getData('css_classes') . '" ' .
+        if($this->_helper->getIsEnable()){
+
+            $wording = $this->_helper->getWordingHidePrice();
+            
+            if(!(bool)$this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH)){
+                return '<div class="price-box" ' .
                     'data-role="priceBox" ' .
                     'data-product-id="' . $this->getSaleableItem()->getId() . '"' .
-                    '>' . $html . '</div>';
+                    '>'.$wording.'</div>';
+            }
+            
         }
-        
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $httpContext = $objectManager->get('Magento\Framework\App\Http\Context');
-        $isLoggedIn = $httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
-
-        if($isLoggedIn){
-            return '<div class="price-box ' . $this->getData('css_classes') . '" ' .
-                'data-role="priceBox" ' .
-                'data-product-id="' . $this->getSaleableItem()->getId() . '"' .
-                '>' . $html . '</div>';
-        }else{
-            $wording = $this->_helper->getWordingHidePrice();
-            return '<div class="" ' .
-                'data-role="priceBox" ' .
-                'data-product-id="' . $this->getSaleableItem()->getId() . '"' .
-                '>'.$wording.'</div>';
-        }
+            
+        return '<div class="price-box ' . $this->getData('css_classes') . '" ' .
+            'data-role="priceBox" ' .
+            'data-product-id="' . $this->getSaleableItem()->getId() . '" ' .
+            'data-price-box="product-id-' . $this->getSaleableItem()->getId() . '"' .
+            '>' . $html . '</div>';
     }
 }
