@@ -14,7 +14,7 @@
 
 ## Instalaçao Manual:
 
-1 -> Certifique-se que a loja encontre-se em modo produção,
+1 -> Certifique-se que a loja encontre-se em modo desenvolvimento,
 
 2 -> Clone este repositório para dentro da sua pasta app/code/Buzz/
 
