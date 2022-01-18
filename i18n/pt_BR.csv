@@ -5,6 +5,6 @@
 "Yes","Sim"
 "No","Não"
 "wording when price hide",""
-"This works only if you choose to display out hide price.","Ativando a função os clientes só vão conseguir ver o preço após login"
+"This works only if you choose to display out hide price.","Ativando a função os clientes só vão conseguir ver o preço após login."
 "Wording Price Hide","Texto que será exibido no frontend"
 "wording when price hide","Exemplo: Efetue o login para ver o preço"

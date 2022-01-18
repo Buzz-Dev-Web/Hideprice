@@ -2,14 +2,14 @@
 <!--
 /**  
  * @package   Buzz_Hideprice
- * @author    mauricio@plataformamagento.com.br
+ * @author    github.com/mauricio-tonny
  * @copyright Copyright (c) 
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="buzz" translate="label" sortOrder="11">
+        <tab id="buzz_hide_price" translate="label" sortOrder="12">
             <label>Buzz</label>
         </tab>
         <section id="buzz_hideprice" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
