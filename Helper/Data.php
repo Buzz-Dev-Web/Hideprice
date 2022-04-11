@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @package   Buzz_Hideprice
+ * @author    github.com/mauricio-tonny
+ * @copyright Copyright (c)
+ */
+
 namespace Buzz\Hideprice\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;

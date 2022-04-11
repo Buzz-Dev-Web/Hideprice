@@ -32,6 +32,10 @@
                     <comment>wording when price hide</comment>
                 </field>
             </group>
+            <group id="hideprice_dev" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Information for the DEV</label>
+                <frontend_model>Buzz\Hideprice\Block\Adminhtml\System\Config\Documentation</frontend_model>
+            </group>
         </section>
     </system>
 </config>

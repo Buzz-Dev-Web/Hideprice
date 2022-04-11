@@ -1,7 +1,9 @@
 <?php
+
 /**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
+ * @package   Buzz_Hideprice
+ * @author    github.com/mauricio-tonny
+ * @copyright Copyright (c)
  */
 
 namespace Buzz\Hideprice\Pricing\Render;
