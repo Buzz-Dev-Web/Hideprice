@@ -1,16 +1,15 @@
-# Ocultar preços para cliente não logado na loja.
+# Hideprice - BUZZ
 
+O propósito desse módulo é desabilitar/ocultar o preço quando o cliente não estiver logado com isso garantindo maior sigilo nas informações disponibilizadas, este recurso geralmente é muito utilizado por clientes que trabalham na modalidade B2B e ou que atuam no segmento do Agro.
 
 ## Requisitos
 
-* Pasta BUZZ dentro da app/code (obrigatorio),
-* Preferencialmente modulo *Base* instalado (nao obrigatorio),
+* Pasta BUZZ dentro da app/code (obrigatório),
+* Módulo *Base* instalado (obrigatório),
 
 ## Compatibilidade
 
-- [x] Testado em Magento 2.2.x
-- [x] Testado em Magento 2.3.x
-- [x] Testado em Magento 2.4.1
+- [x] Testado em Magento 2.4.x
 
 ## Instalaçao Manual:
 
@@ -22,7 +21,15 @@
 
 4 -> A disposição dos arquivos deve ficar dessa maneira: app/code/Buzz/Hideprice
 
-5 -> Execute o comando:
+5 -> Habilite o módulo através do comando:
+
+```
+
+bin/magento module:enable Buzz_Hideprice
+
+```
+
+6 -> Para atualizar a loja o comando:
 
 ```
 
@@ -37,37 +44,17 @@ Posteriormente execute o comando:
 bin/magento setup:di:compile 
 
 ```
-## Configuração:
 
-6 -> Acesse o painel Magento;
+7 -> O módulo já está instalado e dispensa configuração, porém no menu do módulo existe o indicador de versão em...
 
-7 -> Acesse o seguinte diretório: 
+PAINEL MAGENTO -> LOJAS -> CONFIGURACAO -> BUZZ -> OCULTAR PREÇO
 
-    LOJAS > CONFIGURAÇÃO > BUZZ > Ocultar preço
 
-    e/ou
-
-    STORES > CONFIGURATION > BUZZ > Hide price
-
-8 -> Altere o status de ENABLE para YES | HABILITADO para SIM
-
-![1-opcaomenu](https://github.com/Buzz-Dev-Web/Hideprice/blob/main/images/1-habilitar.png)
-
-9 -> Preencha o campo abaixo da função de habilitar com o texto que deseja que seja exibido no frontend (visão cliente).
-
-![1-textofront](https://github.com/Buzz-Dev-Web/Hideprice/blob/main/images/2-habilitado.png)
-
-10 -> Limpe o cache da loja.
-
-11 -> No frontend o resultado esperado é:
-
-![3-visãocliente](https://github.com/Buzz-Dev-Web/Hideprice/blob/main/images/3-visaocliente.png)
-
-## Instalaçao via composer
+### Instalação via Composer:
 
 Em desenvolvimento !
 
 
-## Dúvidas/Problemas
+## Dúvida/Suporte:
 
-Consulte seu supervisor.
+Em caso de dúvidas entre em contato com o dept de suporte.

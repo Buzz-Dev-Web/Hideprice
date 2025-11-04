@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
-<!--
-/**
- * 
- * @package   Buzz_Hideprice
- * @author    mauricio@plataformamagento.com.br
- * @copyright Copyright (c) 
- */
+<!-- 
+    /**
+    * @package   Buzz_Hideprice
+    * @author    github.com/mauricio-tonny
+    * @copyright Copyright (c)
+    */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
-   <module name="Buzz_Hideprice" setup_version="1.0.0" schema_version="1.0.0"/>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
+    <module name="Buzz_Hideprice" setup_version="1.0.0">
+        <sequence>
+            <module name="Magento_Sales"/>
+        </sequence>
+    </module>	
 </config>

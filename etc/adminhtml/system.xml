@@ -1,41 +1,50 @@
 <?xml version="1.0"?>
 <!--
-/**  
- * @package   Buzz_Hideprice
- * @author    github.com/mauricio-tonny
- * @copyright Copyright (c) 
- */
+    /**
+    * @package   Buzz_Hideprice
+    * @author    github.com/mauricio-tonny
+    * @copyright Copyright (c)
+    */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="buzz_hide_price" translate="label" sortOrder="999999">
+        <tab id="buzz_hideprice" translate="label" sortOrder="999999">
             <label>Buzz</label>
         </tab>
         <section id="buzz_hideprice" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Hide Price</label>
             <tab>buzz</tab>
-            <resource>Buzz_Hideprice::config_hideprice</resource>
-            <group id="general" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>General Setting</label>
-                <comment>This module is intended to hide the value of products from unlogged in customers.</comment>
-                <field id="enabled" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enabled</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>This works only if you choose to display out hide price.</comment>
-                </field>
-                <field id="wording_hide_price" translate="label comment" sortOrder="2" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Wording Price Hide</label>
-                    <depends>
-                        <field id="enabled">1</field>
-                    </depends>
-                    <comment>wording when price hide</comment>
-                </field>
+            <resource>Buzz_Hideprice::config_base</resource>
+			<group id="available" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="hide_add_to_cart" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hide Add To Cart</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>                      
+				</field>
+                <field id="hide_add_to_cart_groups" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hide from Groups</label>
+                    <source_model>Buzz\Hideprice\Model\Config\Source\Customer\Group</source_model> 
+					<depends>
+						<field id="hide_add_to_cart">1</field>
+					</depends>
+                    <comment>Disable only for selected groups.</comment>				
+				</field>				
+                <field id="hide_price" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hide price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>		                      
+				</field>
+                <field id="hide_price_groups" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Hide from Groups</label>
+                    <source_model>Buzz\Hideprice\Model\Config\Source\Customer\Group</source_model> 
+					<depends>
+						<field id="hide_price">1</field>
+					</depends>				
+				</field>					
             </group>
-            <group id="hideprice_dev" translate="label" type="text" sortOrder="99" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Information for the DEV</label>
+            <group id="table_configure" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>How to configure ?</label>
                 <frontend_model>Buzz\Hideprice\Block\Adminhtml\System\Config\Documentation</frontend_model>
             </group>
-        </section>
+        </section>		
     </system>
 </config>
