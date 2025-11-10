@@ -98,12 +98,17 @@ class RenderPlugin
         }
 
         /**
-         * Retorna a mensagem com o link
+         * Retorna a mensagem com o link e oculta o estoque
          */
+        $cssHideStock = '<style>
+            .stock.available, .stock.unavailable, .availability { display: none !important; }
+        </style>';
+
         return sprintf(
-            '<a href="%s" class="buzz-hideprice-link">
+            '%s<a href="%s" class="buzz-hideprice-link">
                 <div class="buzz-hideprice-message">%s</div>
             </a>',
+            $cssHideStock,
             $loginUrl,
             __('Log in to see the price.')
         );
