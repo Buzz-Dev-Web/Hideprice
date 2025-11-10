@@ -13,4 +13,9 @@
                 type="Buzz\Hideprice\Plugin\Pricing\RenderPlugin"
                 sortOrder="10" />
     </type>
+    <type name="Magento\Framework\App\Http\Context">
+        <plugin name="buzz_hideprice_customer_context"
+                type="Buzz\Hideprice\Plugin\Customer\ContextPlugin"
+                sortOrder="20" />
+    </type>
 </config>

@@ -12,96 +12,65 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Customer\Model\Session;
+use Magento\Framework\App\Http\Context as HttpContext;
+use Magento\Customer\Model\Context as CustomerContext;
 
-/**
- * Buzz Hideprice Data helper
-*/
 class Data extends AbstractHelper
 {
-    /**
-     * Hide Add To Cart Config Path
-     */
     const XML_CONFIG_HIDE_ADD_TO_CART = 'buzz_hideprice/available/hide_add_to_cart';
-	
-    /**
-     * Hide From Groups Config Path
-     */
     const XML_CONFIG_HIDE_ADD_TO_CART_GROUPS = 'buzz_hideprice/available/hide_add_to_cart_groups';
-	
-    /**
-     * Hide Price Config Path
-     */
     const XML_CONFIG_HIDE_PRICE = 'buzz_hideprice/available/hide_price';
-	
-    /**
-     * Hide From Groups Config Path
-     */
     const XML_CONFIG_HIDE_PRICE_GROUPS = 'buzz_hideprice/available/hide_price_groups';
-	
-    /**
-	 * Customer Session
-	 *
-     * @var \Magento\Customer\Model\Session
-     */
-    protected $_session;
 
-    /**
-     * Initialize Helper
-	 *
-     * @param Context $context
-     * @param Session $session
-     */
+    protected $_session;
+    protected $httpContext;
+
     public function __construct(
         Context $context,
-        Session $session
+        Session $session,
+        HttpContext $httpContext
     ) {
         $this->_session = $session;
-		
-        parent::__construct(
-			$context
-		);
+        $this->httpContext = $httpContext;
+        parent::__construct($context);
+    }
+
+    public function isAvailableAddToCart()
+    {
+        if ($this->_getConfig(self::XML_CONFIG_HIDE_ADD_TO_CART)) {
+            return !in_array(
+                $this->_session->getCustomerGroupId(),
+                explode(',', $this->_getConfig(self::XML_CONFIG_HIDE_ADD_TO_CART_GROUPS))
+            );
+        }
+        return true;
     }
 
     /**
-     * Check Whether The Customer Allows Add To Cart
-     *
-     * @return bool
-     */
-    public function isAvailableAddToCart()
-    {
-		if ($this->_getConfig(self::XML_CONFIG_HIDE_ADD_TO_CART)) {
-			return !in_array(
-				$this->_session->getCustomerGroupId(), 
-				explode(',', $this->_getConfig(self::XML_CONFIG_HIDE_ADD_TO_CART_GROUPS))
-			);			
-		}
-		return true;
-    }	
-
-    /**
-     * Check Whether The Customer Allows Price
-     *
-     * @return bool
+     * Check whether the customer can see prices
      */
     public function isAvailablePrice()
     {
-		if ($this->_getConfig(self::XML_CONFIG_HIDE_PRICE)) {
-			return !in_array(
-				$this->_session->getCustomerGroupId(), 
-				explode(',', $this->_getConfig(self::XML_CONFIG_HIDE_PRICE_GROUPS))
-			);	      
-		}
-		return true;
-    }	 
-	
-    /**
-     * Retrieve Store Configuration Data
-     *
-     * @param   string $path
-     * @return  string|null
-     */
+        if (!(bool)$this->_getConfig(self::XML_CONFIG_HIDE_PRICE)) {
+            return true;
+        }
+    
+        $isLoggedIn = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
+    
+        if (!$isLoggedIn) {
+            return false;
+        }
+    
+        $hiddenGroups = explode(',', (string)$this->_getConfig(self::XML_CONFIG_HIDE_PRICE_GROUPS));
+        if (in_array($this->_session->getCustomerGroupId(), $hiddenGroups)) {
+            return false;
+        }
+    
+        return true;
+    }
+
     protected function _getConfig($path)
     {
         return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
-    }      
+    }
 }
