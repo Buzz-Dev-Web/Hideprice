@@ -50,17 +50,6 @@ bin/magento setup:di:compile
 PAINEL MAGENTO -> LOJAS -> CONFIGURACAO -> BUZZ -> OCULTAR PREÇO
 
 
-**OBS:** Dica, pode executar:
-
-    require(['Magento_Customer/js/customer-data'], function (customerData) {
-        console.log(customerData.get('customer')());
-    });
-
-No console para debugar se cliente logado/deslogado, o retorno deve ser:
-
-    {firstname: ...} → logado
-    {} → guest
-
 ### Instalação via Composer:
 
 Em desenvolvimento !

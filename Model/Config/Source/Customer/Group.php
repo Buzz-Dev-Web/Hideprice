@@ -1,38 +1,23 @@
 <?php
 
-/**
-* @package   Buzz_Hideprice
-* @author    github.com/mauricio-tonny
-* @copyright Copyright (c)
-*/
-
 namespace Buzz\Hideprice\Model\Config\Source\Customer;
 
 use Magento\Framework\Option\ArrayInterface;
 use Magento\Customer\Model\ResourceModel\Group\CollectionFactory;
 
-/**
- * Customer Groups Source Option
- */
 class Group implements ArrayInterface
 {
     /**
-     * Customer Groups Options array
-     *
      * @var null|array
      */
     protected $_options;
 
     /**
-     * Customer Group Collection Factory
-     *
      * @var \Magento\Customer\Model\ResourceModel\Group\CollectionFactory
      */
     protected $_collectionFactory;
 
     /**
-	 * Initialize Source
-	 *	
      * @param CollectionFactory $collectionFactory
      */
     public function __construct(
@@ -42,8 +27,6 @@ class Group implements ArrayInterface
     }
 
     /**
-     * Retrieve Customer Groups As Options
-     *
      * @return array
      */
     public function toOptionArray()

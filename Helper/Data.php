@@ -12,65 +12,62 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Customer\Model\Session;
-use Magento\Framework\App\Http\Context as HttpContext;
-use Magento\Customer\Model\Context as CustomerContext;
 
 class Data extends AbstractHelper
 {
     const XML_CONFIG_HIDE_ADD_TO_CART = 'buzz_hideprice/available/hide_add_to_cart';
+
     const XML_CONFIG_HIDE_ADD_TO_CART_GROUPS = 'buzz_hideprice/available/hide_add_to_cart_groups';
+
     const XML_CONFIG_HIDE_PRICE = 'buzz_hideprice/available/hide_price';
+
     const XML_CONFIG_HIDE_PRICE_GROUPS = 'buzz_hideprice/available/hide_price_groups';
 
-    protected $_session;
-    protected $httpContext;
+    /**
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $session;
 
+    /**
+     * @param Context $context
+     * @param Session $session
+     */
     public function __construct(
         Context $context,
-        Session $session,
-        HttpContext $httpContext
+        Session $session
     ) {
-        $this->_session = $session;
-        $this->httpContext = $httpContext;
-        parent::__construct($context);
-    }
+        $this->session = $session;
 
-    public function isAvailableAddToCart()
-    {
-        if ($this->_getConfig(self::XML_CONFIG_HIDE_ADD_TO_CART)) {
-            return !in_array(
-                $this->_session->getCustomerGroupId(),
-                explode(',', $this->_getConfig(self::XML_CONFIG_HIDE_ADD_TO_CART_GROUPS))
-            );
-        }
-        return true;
+        parent::__construct(
+			$context
+		);
     }
 
     /**
-     * Check whether the customer can see prices
+     * @return bool
      */
-    public function isAvailablePrice()
+    public function hideAddToCart()
     {
-        if (!(bool)$this->_getConfig(self::XML_CONFIG_HIDE_PRICE)) {
-            return true;
-        }
-    
-        $isLoggedIn = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
-    
-        if (!$isLoggedIn) {
-            return false;
-        }
-    
-        $hiddenGroups = explode(',', (string)$this->_getConfig(self::XML_CONFIG_HIDE_PRICE_GROUPS));
-        if (in_array($this->_session->getCustomerGroupId(), $hiddenGroups)) {
-            return false;
-        }
-    
-        return true;
+        if ($this->scopeConfig->isSetFlag(self::XML_CONFIG_HIDE_ADD_TO_CART, ScopeInterface::SCOPE_STORE)) {
+			return in_array(
+				$this->session->getCustomerGroupId(),
+				explode(',', $this->scopeConfig->getValue(self::XML_CONFIG_HIDE_ADD_TO_CART_GROUPS, ScopeInterface::SCOPE_STORE))
+			);
+		}
+		return false;
     }
 
-    protected function _getConfig($path)
+    /**
+     * @return bool
+     */
+    public function hidePrice()
     {
-        return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
+		if ($this->scopeConfig->isSetFlag(self::XML_CONFIG_HIDE_PRICE, ScopeInterface::SCOPE_STORE)) {
+			return in_array(
+				$this->session->getCustomerGroupId(),
+				explode(',', $this->scopeConfig->getValue(self::XML_CONFIG_HIDE_PRICE_GROUPS, ScopeInterface::SCOPE_STORE))
+			);
+		}
+		return false;
     }
 }

@@ -17,30 +17,36 @@
             <tab>buzz</tab>
             <resource>Buzz_Hideprice::config_base</resource>
 			<group id="available" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>General Settings</label>
-                <field id="hide_add_to_cart" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label>Product Hide Price</label>
+                <field id="hide_add_to_cart" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Hide Add To Cart</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>                      
 				</field>
-                <field id="hide_add_to_cart_groups" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="hide_add_to_cart_groups" translate="label" type="multiselect" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Hide from Groups</label>
-                    <source_model>Buzz\Hideprice\Model\Config\Source\Customer\Group</source_model> 
+                    <source_model>Buzz\Hideprice\Model\Config\Source\Customer\Group</source_model>
 					<depends>
 						<field id="hide_add_to_cart">1</field>
-					</depends>
-                    <comment>Disable only for selected groups.</comment>				
+					</depends> 					
 				</field>				
-                <field id="hide_price" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="hide_price" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Hide price</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>		                      
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>                      
 				</field>
-                <field id="hide_price_groups" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="hide_price_groups" translate="label" type="multiselect" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Hide from Groups</label>
-                    <source_model>Buzz\Hideprice\Model\Config\Source\Customer\Group</source_model> 
+                    <source_model>Buzz\Hideprice\Model\Config\Source\Customer\Group</source_model>
 					<depends>
 						<field id="hide_price">1</field>
-					</depends>				
-				</field>					
+					</depends> 					
+				</field>
+                <field id="hide_price_text" translate="label comment" sortOrder="5" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Hide Price Text</label>
+                    <depends>
+                        <field id="hide_price">1</field>
+                    </depends>
+                    <comment>Text instead of the price, if price is hidden</comment>
+                </field>
             </group>
             <group id="table_configure" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>How to configure ?</label>
