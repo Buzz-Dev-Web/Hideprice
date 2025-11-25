@@ -1,0 +1,9 @@
+body.buzz-guest .price-box,
+body.buzz-guest .product-item-details .price-box,
+body.buzz-guest .product-info-price .price-box {
+    visibility: hidden !important;
+}
+
+body.buzz-logged-in .buzz-hideprice-message {
+    display: none !important;
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+    /**
+    * @package   Buzz_Hideprice
+    * @author    github.com/mauricio-tonny
+    * @copyright Copyright (c)
+    */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head>
+        <css src="Buzz_Hideprice::css/hideprice-fix.css" />
+    </head>
+
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="buzz_hideprice_privatecontent"
+                   template="Buzz_Hideprice::privatecontent.phtml"
+                   before="-"/>
+        </referenceContainer>
+    </body>
+
+</page>

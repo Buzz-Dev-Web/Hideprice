@@ -52,33 +52,36 @@ class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
 
     protected function _toHtml()
     {
-        if ($this->helper->hidePrice()) {
-            $isLoggedIn = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
-    
-            if (!$isLoggedIn) {
-    
-                $value = $this->_scopeConfig->getValue(
-                    'buzz_hideprice/available/hide_price_text',
-                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-                );
-    
-                $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
-    
-                $loginUrl = $this->getUrl(
-                    'customer/account/login',
-                    ['referer' => base64_encode($currentUrl)]
-                );
-    
-                if (!empty($value)) {
-                    return sprintf(
-                        '<a href="%s" class="buzz-hideprice-message">%s</a>',
-                        $loginUrl,
-                        $value
-                    );
-                }
-            }
+        if (!$this->helper->hidePrice()) {
+            return parent::_toHtml();
         }
     
-        return parent::_toHtml();
-    }    
+        $value = $this->_scopeConfig->getValue(
+            'buzz_hideprice/available/hide_price_text',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    
+        $currentUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+    
+        $loginUrl = $this->getUrl(
+            'customer/account/login',
+            ['referer' => base64_encode($currentUrl)]
+        );
+    
+        if (empty($value)) {
+            $value = __('Log in to see the price');
+        }
+    
+        $loginHtml = sprintf(
+            '<a href="%s" class="buzz-hideprice-message">%s</a>',
+            $loginUrl,
+            $value
+        );
+    
+        return
+            '<div class="buzz-price-wrapper">' .
+                $loginHtml .
+                parent::_toHtml() .
+            '</div>';
+    }        
 }
