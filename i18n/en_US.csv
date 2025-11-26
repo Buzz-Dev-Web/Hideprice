@@ -6,3 +6,5 @@
 "Hide Price Text","Hide Price Text"
 "Text instead of the price, if price is hidden","Text instead of the price, if price is hidden"
 "You can not add products to cart.","You can not add products to cart."
+"Enable Fallback","Enable Fallback"
+"If enabled, it updates the cache (hard refresh) when the client logs in/logs out.","If enabled, it updates the cache (hard refresh) when the client logs in/logs out."

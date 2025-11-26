@@ -23,6 +23,8 @@ class Data extends AbstractHelper
 
     const XML_CONFIG_HIDE_PRICE_GROUPS = 'buzz_hideprice/available/hide_price_groups';
 
+    const XML_CONFIG_ENABLE_FALLBACK = 'buzz_hideprice/available/enable_fallback';
+
     /**
      * @var \Magento\Customer\Model\Session
      */
@@ -36,11 +38,11 @@ class Data extends AbstractHelper
         Context $context,
         Session $session
     ) {
-        $this->session = $session;
+          $this->session = $session;
 
-        parent::__construct(
-			$context
-		);
+          parent::__construct(
+        $context
+      );
     }
 
     /**
@@ -49,12 +51,12 @@ class Data extends AbstractHelper
     public function hideAddToCart()
     {
         if ($this->scopeConfig->isSetFlag(self::XML_CONFIG_HIDE_ADD_TO_CART, ScopeInterface::SCOPE_STORE)) {
-			return in_array(
-				$this->session->getCustomerGroupId(),
-				explode(',', $this->scopeConfig->getValue(self::XML_CONFIG_HIDE_ADD_TO_CART_GROUPS, ScopeInterface::SCOPE_STORE))
-			);
-		}
-		return false;
+          return in_array(
+            $this->session->getCustomerGroupId(),
+            explode(',', $this->scopeConfig->getValue(self::XML_CONFIG_HIDE_ADD_TO_CART_GROUPS, ScopeInterface::SCOPE_STORE))
+          );
+        }
+		    return false;
     }
 
     /**
@@ -62,12 +64,25 @@ class Data extends AbstractHelper
      */
     public function hidePrice()
     {
-		if ($this->scopeConfig->isSetFlag(self::XML_CONFIG_HIDE_PRICE, ScopeInterface::SCOPE_STORE)) {
-			return in_array(
-				$this->session->getCustomerGroupId(),
-				explode(',', $this->scopeConfig->getValue(self::XML_CONFIG_HIDE_PRICE_GROUPS, ScopeInterface::SCOPE_STORE))
-			);
-		}
-		return false;
+      if ($this->scopeConfig->isSetFlag(self::XML_CONFIG_HIDE_PRICE, ScopeInterface::SCOPE_STORE)) {
+        return in_array(
+          $this->session->getCustomerGroupId(),
+          explode(',', $this->scopeConfig->getValue(self::XML_CONFIG_HIDE_PRICE_GROUPS, ScopeInterface::SCOPE_STORE))
+        );
+      }
+      return false;
+    }
+
+    /**
+     * Check if the fallback mode is enabled
+     *
+     * @return bool
+     */
+    public function enableFallback()
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_CONFIG_ENABLE_FALLBACK,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 }

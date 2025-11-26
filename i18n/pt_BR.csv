@@ -6,3 +6,5 @@
 "Hide Price Text","Texto Quando Preço Oculto"
 "Text instead of the price, if price is hidden","Exibir texto em vez do preço, caso o preço esteja oculto."
 "You can not add products to cart.","Não é possível adicionar produtos ao carrinho."
+"Enable Fallback","Habilitar Fallback"
+"If enabled, it updates the cache (hard refresh) when the client logs in/logs out.","Se habilitado, atualiza o cache (hard refresh) quando o cliente efetua login/logout"

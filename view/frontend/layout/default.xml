@@ -15,10 +15,9 @@
 
     <body>
         <referenceContainer name="before.body.end">
-            <block class="Magento\Framework\View\Element\Template"
-                   name="buzz_hideprice_privatecontent"
-                   template="Buzz_Hideprice::privatecontent.phtml"
-                   before="-"/>
+            <block class="Buzz\Hideprice\Block\PrivateContent"
+                name="buzz_hideprice_privatecontent"
+                template="Buzz_Hideprice::privatecontent.phtml"/>
         </referenceContainer>
     </body>
 

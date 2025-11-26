@@ -7,10 +7,12 @@
     */
 
 ?>
-<script type="text/x-magento-init">
-{
-    "*": {
-        "Buzz_Hideprice/js/state-check": {}
+<?php if ($block->getHelper()->enableFallback()): ?>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "Buzz_Hideprice/js/state-check": {}
+        }
     }
-}
-</script>
+    </script>
+<?php endif; ?>

@@ -16,6 +16,7 @@
                 <hide_price>1</hide_price>
                 <hide_price_groups>0</hide_price_groups>
                 <hide_price_text>Faça login para ver o preço.</hide_price_text>
+                <enable_fallback>0</enable_fallback>
             </available>
         </buzz_hideprice>
     </default>
